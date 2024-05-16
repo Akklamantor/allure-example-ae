@@ -1,0 +1,14 @@
+# Idea
+.idea
+*.im;
+/bin/
+
+# Gradle
+.gradle
+build
+
+# allure framework files
+.allure/
+/testplan.json
+/.vscode/
+.DS_Store
