@@ -36,9 +36,9 @@ jobs:
       - name: install and configure allurectl
         uses: allure-framework/setup-allurectl@v1
         with:
-          allure-endpoint: https://demo.testops.cloud
-          allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: ${{ env.ALLURE_PROJECT_ID }}
+          allure-endpoint: https://testing.testops.cloud
+          allure-token: ${{ 635c1155-0671-4ef6-854e-c85b5eaaafd9.ALLURE_TOKEN }}
+          allure-project-id: 7806
       - name: Build with Gradle
         run: |
           allurectl watch -- ./gradlew clean test
