@@ -37,7 +37,7 @@ jobs:
         uses: allure-framework/setup-allurectl@v1
         with:
           allure-endpoint: https://testing.testops.cloud
-          allure-token: ${{ 635c1155-0671-4ef6-854e-c85b5eaaafd9.ALLURE_TOKEN }}
+          allure-token: 635c1155-0671-4ef6-854e-c85b5eaaafd9
           allure-project-id: 7806
       - name: Build with Gradle
         run: |
