@@ -22,7 +22,7 @@ on:
 env:
   ALLURE_RESULTS: "build/allure-results"
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
-  ALLURE_PROJECT_ID: 338
+  ALLURE_PROJECT_ID: 7806
 
 jobs:
   all-tests:
