@@ -20,9 +20,8 @@ on:
         required: false
 
 env:
-  ALLURE_ENDPOINT: https://testing.testops.cloud/
+  ALLURE_ENDPOINT: https://testing.testops.cloud/ 
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
-  ALLURE_PROJECT_ID: 7806
   ALLURE_RESULTS: "build/allure-results"
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
 
@@ -40,19 +39,20 @@ jobs:
         with:
           allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
           allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: ${{ env.ALLURE_PROJECT_ID }}
+          allure-project-id: 7806
       - name: Build with Gradle
         run: |
           allurectl watch -- ./gradlew clean test
-          export $( ./allurectl job-run env)
-          printenv | grep TEST_
+          export $(allurectl job-run env)
           printenv | grep ALLURE_
         env:
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
           TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
       - name: Get ALLURE_ environments
-        run: | 
+        run: |
+          export $(allurectl job-run env)
           printenv | grep ALLURE_
+          echo ${ALLURE_JOB_RUN_ID}
       - name: Get GITHUB_ environments
         run: | 
           printenv | grep GITHUB_
