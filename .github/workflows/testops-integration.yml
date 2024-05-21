@@ -1,23 +1,10 @@
-name: gh-integration
+name: API HMB ALLURE
 
 on:
-  push:
   workflow_dispatch:
     inputs:
-      TEST_ENDPOINT:
-        description: "Endpoint for tests"
-        required: true
-        default: https://dev.github.com
-      TEST_BROWSER:
-        description: "Browser for tests"
-        required: true
-        default: chrome
-      ALLURE_JOB_RUN_ID:
-        description: "ALLURE_JOB_RUN_ID service parameter. Leave blank."
-        required: false
       ALLURE_USERNAME:
-        description: "ALLURE_USERNAME service parameter. Leave blank"
-        required: false
+        description: ALLURE_USERNAME service parameter. Leave blank.
       QA_ENV:
         type: choice
         description: 'QA Environment'
@@ -44,42 +31,46 @@ on:
           - 17
         default: 'sdet1'
 
-env:
-  ALLURE_ENDPOINT: https://testing.testops.cloud/ 
-  ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
-  ALLURE_RESULTS: "build/allure-results"
-  ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
 
+env:
+    ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
+    ALLURE_ENDPOINT: https://testing.testops.cloud/ 
+    ALLURE_PROJECT_ID: 7806
+    
 jobs:
-  all-tests:
-    runs-on: ubuntu-latest
+  build:
+    timeout-minutes: 30
+    runs-on:
+      group: soundboard
+  #  env:
+    #  GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
+
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Set up JDK 1.8
-        uses: actions/setup-java@v1
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/pgp-download
         with:
-          java-version: 1.8
-      - name: install and configure allurectl
-        uses: allure-framework/setup-allurectl@v1
+          token: ${{ secrets.GH_PAT }}
+      - uses: ./.github/actions/pgp-inject
         with:
-          allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
-          allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: 7806
-      - name: Build with Gradle
-        run: |
-          allurectl watch -- ./gradlew clean test
-          export $(allurectl job-run env)
-          printenv | grep ALLURE_
-        env:
-          TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
-          TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
-      - name: Get ALLURE_ environments
-        run: |
-          export $(allurectl job-run env)
-          printenv | grep ALLURE_
-          echo ${ALLURE_JOB_RUN_ID}
-      - name: Get GITHUB_ environments
-        run: | 
-          printenv | grep GITHUB_
+          gpgFile: ${{ inputs.QA_ENV }}
+      - uses: ./.github/actions/dependencies
+      - name: Install API dependencies
+        run: cd test-components/api && npm ci
+      - name: Install PW 
+        run: cd test-components/api && npx playwright install
+      - name: Run API PW HMB Tests
+        if: success() || failure()
+        run: cd test-components/api-pw/workflow-pod && npx playwright test tests/HMB --workers=1
+      - name: Upload Report Artifact
+        if: success() || failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-report
+          path: _OUTPUT/html-report
+          retention-days: 5
+      - name: Upload Allure Results
+        if: success() || failure()
+        uses: ./.github/actions/allure
       - name: List results
         run: ls -la ${ALLURE_RESULTS}
