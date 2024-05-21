@@ -5,32 +5,6 @@ on:
     inputs:
       ALLURE_USERNAME:
         description: ALLURE_USERNAME service parameter. Leave blank.
-      QA_ENV:
-        type: choice
-        description: 'QA Environment'
-        required: false
-        options:
-          - sdet1
-          - sdet2
-          - 1
-          - 2
-          - 3
-          - 4
-          - 5
-          - 6
-          - 7
-          - 8
-          - 9
-          - 10
-          - 11
-          - 12
-          - 13
-          - 14
-          - 15
-          - 16
-          - 17
-        default: 'sdet1'
-
 
 env:
     ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
@@ -40,11 +14,8 @@ env:
 jobs:
   build:
     timeout-minutes: 30
-    runs-on:
-      group: soundboard
-  #  env:
-    #  GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
-
+    runs-on: ubuntu-latest
+      #group: soundboard
 
     steps:
       - uses: ./.github/actions/dependencies
