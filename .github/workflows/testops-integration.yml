@@ -47,13 +47,6 @@ jobs:
 
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/pgp-download
-        with:
-          token: ${{ secrets.GH_PAT }}
-      - uses: ./.github/actions/pgp-inject
-        with:
-          gpgFile: ${{ inputs.QA_ENV }}
       - uses: ./.github/actions/dependencies
       - name: Install API dependencies
         run: cd test-components/api && npm ci
