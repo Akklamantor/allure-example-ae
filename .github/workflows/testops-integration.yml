@@ -5,6 +5,13 @@ on:
     inputs:
       ALLURE_USERNAME:
         description: ALLURE_USERNAME service parameter. Leave blank.
+      ALLURE_JOB_RUN_ID:
+        description: "ALLURE_JOB_RUN_ID service parameter. Leave blank."
+        required: false
+      TEST_ENDPOINT:
+        description: "Endpoint for tests"
+        required: true
+        default: https://dev.github.com
 
 env:
     ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
