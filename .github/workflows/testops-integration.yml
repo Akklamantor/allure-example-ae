@@ -42,6 +42,7 @@ jobs:
           allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
           allure-token: ${{ secrets.ALLURE_TOKEN }}
           allure-project-id: 1
+          allurectl-version: 2.15.4
       - name: Build with Gradle
         run: |
           allurectl watch -- ./gradlew clean test
