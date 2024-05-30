@@ -22,7 +22,7 @@ public class MyTest {
     @Microservice("Billing")
     @JiraIssues({@JiraIssue("AE-1")})
     @Tags({@Tag("api"), @Tag("smoke")})
-    @ParameterizedTest(name = "Create issue via api")
+    @ParameterizedTest(name = "NewTest")
     @ValueSource(strings = {"First Note", "Second Note"})
     public void myFirstTest(String title) {
         parameter("owner", OWNER);
@@ -38,7 +38,7 @@ public class MyTest {
     @Microservice("Repository")
     @Tags({@Tag("api"), @Tag("regress")})
     @JiraIssues({@JiraIssue("AE-2")})
-    @ParameterizedTest(name = "Close issue via api")
+    @ParameterizedTest(name = "NotSoNewTest")
     @ValueSource(strings = {"First Note", "Second Note"})
     public void mySecondTest(String title) {
         parameter("owner", OWNER);
