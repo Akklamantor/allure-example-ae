@@ -50,7 +50,7 @@ jobs:
         env:
           TEST_ENDPOINT: ${{ github.event.inputs.TEST_ENDPOINT }}
           TEST_BROWSER: ${{ github.event.inputs.TEST_BROWSER }}
-          GITHUB_TESTS_BRANCH: ${{ github.doptest }}
+          GITHUB_TESTS_BRANCH: ${{ github.ref_name }}
       - name: Get ALLURE_ environments
         run: | 
           printenv | grep ALLURE_
