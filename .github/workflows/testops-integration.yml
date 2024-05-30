@@ -18,6 +18,7 @@ on:
       ALLURE_USERNAME:
         description: "ALLURE_USERNAME service parameter. Leave blank"
         required: false
+      
 
 env:
   ALLURE_RESULTS: "build/allure-results"
