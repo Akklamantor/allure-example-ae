@@ -24,7 +24,7 @@ env:
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
   ALLURE_PROJECT_ID: 1
   ALLURE_ENDPOINT: https://testing.testops.cloud/
-  ALLURE_TOKEN: ${{ secret.ALLURE_TOKEN }}
+  ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
 
 
 jobs:
@@ -40,7 +40,7 @@ jobs:
         uses: allure-framework/setup-allurectl@v1
         with:
           allure-endpoint: ${{ env.ALLURE_ENDPOINT }}
-          allure-token: ${{ secret.ALLURE_TOKEN }}
+          allure-token: ${{ secrets.ALLURE_TOKEN }}
           allure-project-id: 1
       - name: Build with Gradle
         run: |
