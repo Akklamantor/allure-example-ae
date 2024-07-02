@@ -28,7 +28,7 @@ env:
 
 
 jobs:
-  qqwwwewrdfghjklockdsjhfjnkokjsndfbhnjkdojsfhvbnjikdoasjfvhbnjkosfjvbhnjkdlkosfijnghdjdfsjgkksfjdghjdesfkijnkdoksfijngksfodjgn:
+  qqwwwewrdfghjklockdsjhfjnkokjsndfbhnjkdojsfhvbnjikdoasjfvhbnjkosfjvbhnjkdlkosfijnghdjdfsjgkksfjdghjdesfkijn:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
