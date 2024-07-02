@@ -1,4 +1,4 @@
-name: gh-integrationgh-integrationgh-integrationgh-integrationgh-integrationgh-integrationgh-integrationgh-integrationgh-integration
+name: gh-integration
 
 on:
   push:
