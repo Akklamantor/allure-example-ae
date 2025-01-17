@@ -22,8 +22,8 @@ on:
 env:
   ALLURE_RESULTS: "build/allure-results"
   #ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
-  ALLURE_PROJECT_ID: 7806
-  ALLURE_ENDPOINT: https://testing.testops.cloud/
+  ALLURE_PROJECT_ID: 3
+  ALLURE_ENDPOINT: http://116.203.103.50:22869/
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
 
 
