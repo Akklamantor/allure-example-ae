@@ -44,7 +44,6 @@ jobs:
           allure-project-id: 1549
       - name: Build with Gradle
         run: |
-          allurectl ci env 
           export $( ./allurectl job-run env)
           printenv | grep TEST_
           printenv | grep ALLURE_
@@ -59,4 +58,7 @@ jobs:
         run: | 
           printenv | grep GITHUB_
       - name: List results
-        run: ls -la ${ALLURE_RESULTS}
+        run: echo $(allurectl ci env) 
+        
+
+        
