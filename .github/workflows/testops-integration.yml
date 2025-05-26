@@ -58,7 +58,7 @@ jobs:
         run: | 
           printenv | grep GITHUB_
       - name: List results
-        run: echo $(allurectl ci env) 
+        run: allurectl watch -- ./gradlew clean test  
         
 
         
