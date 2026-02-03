@@ -34,7 +34,7 @@ public class PullRequestsWebTest {
     @Tags({@Tag("web"), @Tag("regress"), @Tag("smoke")})
     @JiraIssues({@JiraIssue("AE-3")})
     @DisplayName("Creating new pull request by authorized user")
-    public void shouldCreatePullRequest() {
+    public void shouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequestshouldCreatePullRequest() {
         steps.openPullRequestsPage(OWNER, REPO);
         steps.createPullRequestFromBranch(BRANCH);
         steps.shouldSeePullRequestForBranch(BRANCH);
