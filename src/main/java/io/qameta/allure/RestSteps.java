@@ -6,7 +6,7 @@ import static io.qameta.allure.Allure.step;
 
 public class RestSteps {
 
-    @Step("Create issue with title `{title}`")
+    @Step("Create issue with title https://testing.qatools.cloud/project/1493/test-cases/71530?treeId=0 `{title}`")
     public void createIssueWithTitle(final String owner, final String repo, final String title) {
         step(String.format("POST /repos/%s/%s/issues", owner, repo));
     }
