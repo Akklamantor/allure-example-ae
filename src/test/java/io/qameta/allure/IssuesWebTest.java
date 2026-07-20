@@ -1,6 +1,5 @@
 package io.qameta.allure;
 
-import io.qameta.allure.model.StatusDetails;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -64,9 +63,6 @@ public class IssuesWebTest {
     @JiraIssues({@JiraIssue("AE-6")})
     @DisplayName("Adding note to advertisement")
     public void shouldAddLabelToIssue() {
-        Allure.getLifecycle().updateTestCase(result ->
-                result.setStatusDetails(new StatusDetails().setFlaky(true)));
-
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
         steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
