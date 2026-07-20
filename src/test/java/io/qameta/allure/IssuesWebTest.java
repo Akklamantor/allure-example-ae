@@ -36,6 +36,9 @@ public class IssuesWebTest {
     @Tags({@Tag("web"), @Tag("critical")})
     @DisplayName("Creating new issue by authorized user")
     public void shouldCreateIssue() {
+        Allure.getLifecycle().updateTestCase(result ->
+                result.setStatusDetails(new StatusDetails().setFlaky(true)));
+        
         steps.openIssuesPage(OWNER, REPO);
         steps.createIssueWithTitle(ISSUE_TITLE);
         steps.shouldSeeIssueWithTitle(ISSUE_TITLE);
