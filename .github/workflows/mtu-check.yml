@@ -1,0 +1,16 @@
+name: mtu-check
+on:
+  push:
+    branches: [mtu-check]
+  workflow_dispatch:
+jobs:
+  mtu:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl -s https://ipinfo.io/json
+          U=https://testing.qatools.cloud/api/management/health/
+          for i in 1 2 3 4 5; do curl -s -o /dev/null --max-time 20 -w "default connect=%{time_connect} tls=%{time_appconnect} code=%{http_code}\n" $U; done
+          ip link show eth0 | head -1
+          sudo ip link set dev eth0 mtu 1280
+          for i in 1 2 3 4 5; do curl -s -o /dev/null --max-time 20 -w "mtu1280 connect=%{time_connect} tls=%{time_appconnect} code=%{http_code}\n" $U; done
