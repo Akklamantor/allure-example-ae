@@ -11,7 +11,5 @@ jobs:
           set +e
           curl -s https://ipinfo.io/json; echo
           U=https://testing.qatools.cloud/api/management/health/
-          for i in $(seq 1 10); do curl -s -o /dev/null --max-time 20 -w "default connect=%{time_connect} tls=%{time_appconnect} code=%{http_code} exit=" $U; echo $?; done
-          ip link show eth0 | head -1
-          sudo ip link set dev eth0 mtu 1280
-          for i in $(seq 1 10); do curl -s -o /dev/null --max-time 20 -w "mtu1280 connect=%{time_connect} tls=%{time_appconnect} code=%{http_code} exit=" $U; echo $?; done
+          for i in $(seq 1 20); do curl -s -o /dev/null --max-time 20 -w "direct connect=%{time_connect} tls=%{time_appconnect} code=%{http_code} exit=" $U; echo $?; done
+          for i in $(seq 1 20); do curl -s -o /dev/null --max-time 20 --resolve testing.qatools.cloud:443:185.200.84.123 -w "via-kz connect=%{time_connect} tls=%{time_appconnect} code=%{http_code} exit=" $U; echo $?; done
